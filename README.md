@@ -76,20 +76,8 @@ attachments   id, path, filename, attachable_id, attachable_type
 ## 🚀 Installation
 
 ```bash
-git clone https://github.com/ton-user/helpdesk-app.git
-cd helpdesk-app
-
-composer install
-npm install
-
-cp .env.example .env
-php artisan key:generate
-
-# Configurer la base de données dans .env, puis :
-php artisan migrate --seed
-
-npm run dev
-php artisan serve
+git clone https://github.com/ton-user/helpdesk.git
+cd helpdesk
 ```
 
 ---
