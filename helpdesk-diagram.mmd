@@ -1,0 +1,40 @@
+erDiagram
+	direction TB
+	TICKETS {
+		int id  ""  
+		datetime created_at  ""  
+		datetime updated_at  ""  
+		string title  ""  
+		text description  ""  
+		string status  ""  
+		string priority  ""  
+		string category  ""  
+		int user_id  ""  
+		int assignee_id  ""  
+	}
+
+	COMMENTS {
+		int id  ""  
+		datetime created_at  ""  
+		datetime updated_at  ""  
+		text body  ""  
+		boolean is_internal  ""  
+		int ticket_id  ""  
+		int user_id  ""  
+	}
+
+	USERS {
+		int id  ""  
+		datetime created_at  ""  
+		datetime updated_at  ""  
+		string name  ""  
+		string email  ""  
+		string password  ""  
+		string avatar  ""  
+		boolean active  ""  
+	}
+
+	TICKETS||--o{COMMENTS:"has"
+	USERS||--o{TICKETS:"has"
+	USERS||--o{TICKETS:"assigns"
+	USERS||--o{COMMENTS:"has"

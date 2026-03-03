@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->longText('body');
+            $table->boolean('is_internal')->default(false);
+            $table->foreignId('ticket_id')->constrained();
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
