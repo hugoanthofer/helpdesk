@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum TicketCategory: string
 {
-    case Low = 'low';
-    case Normal = 'normal';
-    case High = 'high';
-    case Urgent = 'urgent';
+    case Bug = 'bug';
+    case Request = 'demande';
+    case Incident = 'incident';
+    case Question = 'question';
 }
