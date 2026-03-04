@@ -1,22 +1,23 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 
-export default function Create() {
-    const { data, setData, post, errors } = useForm({
-        title: "",
-        description: "",
-        priority: "",
-        category: "",
+export default function Edit({ ticket }) {
+    const { data, setData, put, errors } = useForm({
+        title: ticket.title,
+        description: ticket.description,
+        priority: ticket.priority.value,
+        category: ticket.category.value,
+        status: ticket.status.value,
     });
 
     function submit(e) {
         e.preventDefault();
-        post(route('tickets.store'));
+        put(route("tickets.update", ticket.id));
     }
 
     return (
-        <AuthenticatedLayout header={<h2>Nouveau Ticket</h2>}>
-            <Head title="Nouveau ticket" />
+        <AuthenticatedLayout header={<h2>Modification de Ticket</h2>}>
+            <Head title="Modification de ticket" />
             <div className="py-12">
                 <form onSubmit={submit}>
                     <div>
@@ -71,7 +72,21 @@ export default function Create() {
                         </select>
                     </div>
 
-                    <button type="submit">Créer</button>
+                    <div>
+                        <label>Status</label>
+                        <select
+                            value={data.status}
+                            onChange={(e) => setData("status", e.target.value)}
+                        >
+                            <option value="ouvert">Ouvert</option>
+                            <option value="en cours">En cours</option>
+                            <option value="en attente">En attente</option>
+                            <option value="resolu">Résolu</option>
+                            <option value="ferme">Fermé</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Modifier</button>
                 </form>
             </div>
         </AuthenticatedLayout>
