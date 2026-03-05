@@ -66,6 +66,14 @@ export default function Index({ tickets, authId, userRole }) {
                         >
                             Mes tickets
                         </button>
+
+                        <a
+                            href={route("tickets.archived")}
+                            className="rounded-md border border-gray-400 px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+                        >
+                            Archives
+                        </a>
+
                         <a
                             href={route("tickets.create")}
                             className="ml-auto rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"

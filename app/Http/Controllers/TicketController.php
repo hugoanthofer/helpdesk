@@ -18,6 +18,7 @@ class TicketController extends Controller
     {
         $tickets = Ticket::query()
             ->with(['user', 'assignee'])
+            ->where('status', '!=', TicketStatus::Closed->value)
             ->latest()
             ->get();
 
@@ -25,6 +26,22 @@ class TicketController extends Controller
             'tickets' => $tickets,
             'authId' => auth()->id(),
             'userRole' => auth()->user()->getRoleNames()->first(),
+        ]);
+    }
+
+    /**
+     * Display archived (closed) tickets.
+     */
+    public function archived()
+    {
+        $tickets = Ticket::query()
+            ->with(['user', 'assignee'])
+            ->where('status', TicketStatus::Closed->value)
+            ->latest()
+            ->get();
+
+        return Inertia::render('Tickets/Archive', [
+            'tickets' => $tickets,
         ]);
     }
 
