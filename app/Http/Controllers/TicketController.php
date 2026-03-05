@@ -76,7 +76,7 @@ class TicketController extends Controller
             ->findOrFail($id);
         $this->authorize('update', $ticket);
 
-        $agents = User::role(['admin', 'technicien'])->get(['id', 'name']);
+        $agents = User::role(['Admin', 'Technicien'])->get(['id', 'name']);
 
         return Inertia::render('Tickets/Edit', [
             'ticket' => $ticket,
