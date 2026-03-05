@@ -1,7 +1,19 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import { useState } from "react";
 
 export default function Index({ tickets }) {
+    const [filtreStatut, setFiltreStatut] = useState("");
+    const [filtrePriorite, setFiltrePriorite] = useState("");
+
+    const ticketsFiltres = tickets.filter((ticket) => {
+        const matchStatut =
+            filtreStatut === "" || ticket.status === filtreStatut;
+        const matchPriorite =
+            filtrePriorite === "" || ticket.priority === filtrePriorite;
+        return matchStatut && matchPriorite;
+    });
+
     return (
         <AuthenticatedLayout
             header={
@@ -14,14 +26,38 @@ export default function Index({ tickets }) {
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="mb-4 flex justify-end">
+                    <div className="mb-4 flex items-center gap-3">
+                        <select
+                            value={filtreStatut}
+                            onChange={(e) => setFiltreStatut(e.target.value)}
+                            className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+                        >
+                            <option value="">Tous les statuts</option>
+                            <option value="ouvert">Ouvert</option>
+                            <option value="en cours">En cours</option>
+                            <option value="en attente">En attente</option>
+                            <option value="resolu">Résolu</option>
+                            <option value="ferme">Fermé</option>
+                        </select>
+                        <select
+                            value={filtrePriorite}
+                            onChange={(e) => setFiltrePriorite(e.target.value)}
+                            className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+                        >
+                            <option value="">Toutes les priorités</option>
+                            <option value="basse">Basse</option>
+                            <option value="normal">Normale</option>
+                            <option value="haute">Haute</option>
+                            <option value="urgente">Urgente</option>
+                        </select>
                         <a
                             href={route("tickets.create")}
-                            className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                            className="ml-auto rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
                         >
                             Nouveau ticket
                         </a>
                     </div>
+
                     <div className="overflow-hidden rounded-lg bg-white shadow">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
@@ -38,7 +74,7 @@ export default function Index({ tickets }) {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 bg-white">
-                                {tickets.map((ticket) => (
+                                {ticketsFiltres.map((ticket) => (
                                     <tr
                                         key={ticket.id}
                                         className="cursor-pointer hover:bg-gray-50"

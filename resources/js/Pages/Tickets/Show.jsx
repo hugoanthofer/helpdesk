@@ -31,6 +31,14 @@ export default function Show({ ticket, canEdit, canDelete }) {
                             <span>
                                 Priorité : <strong>{ticket.priority}</strong>
                             </span>
+                            <span>
+                                Assigné à :{" "}
+                                <strong>
+                                    {ticket.assignee
+                                        ? ticket.assignee.name
+                                        : "Non assigné"}
+                                </strong>
+                            </span>
                         </div>
                         {(canEdit || canDelete) && (
                             <div className="mt-4 flex gap-2">

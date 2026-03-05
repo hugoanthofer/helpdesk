@@ -27,6 +27,7 @@ class UpdateTicketRequest extends FormRequest
             'priority' => ['required', 'string'],
             'category' => ['required', 'string'],
             'status' => ['required', 'string'],
+            'assignee_id' => ['nullable', 'exists:users,id'],
         ];
     }
 }

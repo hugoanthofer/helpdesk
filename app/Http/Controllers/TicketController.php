@@ -6,6 +6,7 @@ use App\Enums\TicketStatus;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Ticket;
+use App\Models\User;
 use Inertia\Inertia;
 
 class TicketController extends Controller
@@ -73,8 +74,11 @@ class TicketController extends Controller
             ->findOrFail($id);
         $this->authorize('update', $ticket);
 
+        $agents = User::role(['admin', 'technicien'])->get(['id', 'name']);
+
         return Inertia::render('Tickets/Edit', [
             'ticket' => $ticket,
+            'agents' => $agents,
         ]);
     }
 
