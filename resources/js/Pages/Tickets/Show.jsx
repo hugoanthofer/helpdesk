@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, useForm, Link, router } from "@inertiajs/react";
 
-export default function Show({ ticket }) {
+export default function Show({ ticket, canEdit, canDelete }) {
     const { data, setData, post, errors } = useForm({
         body: "",
     });
@@ -32,6 +32,37 @@ export default function Show({ ticket }) {
                                 Priorité : <strong>{ticket.priority}</strong>
                             </span>
                         </div>
+                        {(canEdit || canDelete) && (
+                            <div className="mt-4 flex gap-2">
+                                {canEdit && (
+                                    <Link
+                                        href={route("tickets.edit", ticket.id)}
+                                        className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
+                                    >
+                                        Modifier
+                                    </Link>
+                                )}
+                                {canDelete && (
+                                    <button
+                                        onClick={() => {
+                                            if (
+                                                confirm("Supprimer ce ticket ?")
+                                            ) {
+                                                router.delete(
+                                                    route(
+                                                        "tickets.destroy",
+                                                        ticket.id,
+                                                    ),
+                                                );
+                                            }
+                                        }}
+                                        className="rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700"
+                                    >
+                                        Supprimer
+                                    </button>
+                                )}
+                            </div>
+                        )}
                     </div>
 
                     <div className="rounded-lg bg-white p-6 shadow">

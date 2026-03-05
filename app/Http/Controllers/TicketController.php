@@ -58,6 +58,8 @@ class TicketController extends Controller
 
         return Inertia::render('Tickets/Show', [
             'ticket' => $ticket,
+            'canEdit' => auth()->user()->can('update', $ticket),
+            'canDelete' => auth()->user()->can('delete', $ticket),
         ]);
     }
 
@@ -69,6 +71,7 @@ class TicketController extends Controller
         $ticket = Ticket::query()
             ->with(['user', 'assignee', 'comments'])
             ->findOrFail($id);
+        $this->authorize('update', $ticket);
 
         return Inertia::render('Tickets/Edit', [
             'ticket' => $ticket,
@@ -81,6 +84,7 @@ class TicketController extends Controller
     public function update(UpdateTicketRequest $request, string $id)
     {
         $ticket = Ticket::findOrFail($id);
+        $this->authorize('update', $ticket);
         $ticket->update($request->validated());
 
         return redirect()->route('tickets.show', $ticket);
@@ -92,6 +96,7 @@ class TicketController extends Controller
     public function destroy(string $id)
     {
         $ticket = Ticket::findOrFail($id);
+        $this->authorize('delete', $ticket);
         $ticket->delete();
 
         return redirect()->route('tickets.index');
