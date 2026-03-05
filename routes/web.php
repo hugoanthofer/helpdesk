@@ -17,8 +17,17 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        'stats' => [
+            'ouvert' => \App\Models\Ticket::where('status', 'ouvert')->count(),
+            'en_cours' => \App\Models\Ticket::where('status', 'en cours')->count(),
+            'resolu' => \App\Models\Ticket::where('status', 'resolu')->count(),
+            'total' => \App\Models\Ticket::count(),
+        ],
+        'recentTickets' => \App\Models\Ticket::latest()->take(5)->get(),
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,4 +37,4 @@ Route::middleware('auth')->group(function () {
     Route::resource('tickets.comments', CommentController::class)->only(['store', 'destroy']);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
