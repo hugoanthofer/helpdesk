@@ -77,10 +77,10 @@ export default function Edit({ ticket, agents }) {
                                     }
                                     className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
                                 >
-                                    <option value="basse">Basse</option>
-                                    <option value="normal">Normale</option>
-                                    <option value="haute">Haute</option>
-                                    <option value="urgente">Urgente</option>
+                                    <option value="Basse">Basse</option>
+                                    <option value="Normale">Normale</option>
+                                    <option value="Haute">Haute</option>
+                                    <option value="Urgente">Urgente</option>
                                 </select>
                             </div>
 
@@ -95,10 +95,10 @@ export default function Edit({ ticket, agents }) {
                                     }
                                     className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
                                 >
-                                    <option value="bug">Bug</option>
-                                    <option value="demande">Demande</option>
-                                    <option value="incident">Incident</option>
-                                    <option value="question">Question</option>
+                                    <option value="Bug">Bug</option>
+                                    <option value="Demande">Demande</option>
+                                    <option value="Incident">Incident</option>
+                                    <option value="Question">Question</option>
                                 </select>
                             </div>
 
@@ -113,13 +113,13 @@ export default function Edit({ ticket, agents }) {
                                     }
                                     className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
                                 >
-                                    <option value="ouvert">Ouvert</option>
-                                    <option value="en cours">En cours</option>
-                                    <option value="en attente">
+                                    <option value="Ouvert">Ouvert</option>
+                                    <option value="En cours">En cours</option>
+                                    <option value="En attente">
                                         En attente
                                     </option>
-                                    <option value="resolu">Résolu</option>
-                                    <option value="ferme">Fermé</option>
+                                    <option value="Résolu">Résolu</option>
+                                    <option value="Fermé">Fermé</option>
                                 </select>
                             </div>
 

@@ -24,8 +24,8 @@ test('un utilisateur connecté peut créer un ticket', function () {
     $reponse = $this->actingAs($user)->post(route('tickets.store'), [
         'title' => 'Mon ticket test reponse',
         'description' => 'Lorem ispum',
-        'priority' => 'haute',
-        'category' => 'bug',
+        'priority' => 'Haute',
+        'category' => 'Bug',
     ]);
 
     $reponse->assertRedirect(route('tickets.index'));
@@ -39,9 +39,9 @@ test('un utilisateur connecté peut modifier un ticket', function () {
     $response = $this->actingAs($user)->put(route('tickets.update', $ticket), [
         'title' => 'Mon ticket test reponse modifié',
         'description' => 'Lorem ispum modifié',
-        'priority' => 'basse',
-        'category' => 'incident',
-        'status' => 'resolu',
+        'priority' => 'Basse',
+        'category' => 'Incident',
+        'status' => 'Résolu',
     ]);
 
     $response->assertRedirect(route('tickets.show', $ticket));
