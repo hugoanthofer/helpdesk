@@ -5,9 +5,9 @@ export default function Edit({ ticket, agents }) {
     const { data, setData, put, errors } = useForm({
         title: ticket.title,
         description: ticket.description,
-        priority: ticket.priority.value,
-        category: ticket.category.value,
-        status: ticket.status.value,
+        priority: ticket.priority,
+        category: ticket.category,
+        status: ticket.status,
         assignee_id: ticket.assignee_id ?? "",
     });
 

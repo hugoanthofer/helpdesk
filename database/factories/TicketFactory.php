@@ -27,7 +27,7 @@ class TicketFactory extends Factory
             'priority' => fake()->randomElement(TicketPriority::cases()),
             'category' => fake()->randomElement(TicketCategory::cases()),
             'user_id' => User::factory(),
-            'assignee_id' => User::factory(),
+            'assignee_id' => null,
         ];
     }
 }
