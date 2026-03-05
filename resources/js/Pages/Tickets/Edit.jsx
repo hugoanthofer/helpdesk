@@ -1,6 +1,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 
+const SelectArrow = () => (
+    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+    </div>
+);
+
 export default function Edit({ ticket, agents }) {
     const { data, setData, put, errors } = useForm({
         title: ticket.title,
@@ -70,77 +78,87 @@ export default function Edit({ ticket, agents }) {
                                 <label className="mb-1 block text-sm font-medium text-gray-700">
                                     Priorité
                                 </label>
-                                <select
-                                    value={data.priority}
-                                    onChange={(e) =>
-                                        setData("priority", e.target.value)
-                                    }
-                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
-                                >
-                                    <option value="Basse">Basse</option>
-                                    <option value="Normale">Normale</option>
-                                    <option value="Haute">Haute</option>
-                                    <option value="Urgente">Urgente</option>
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        value={data.priority}
+                                        onChange={(e) =>
+                                            setData("priority", e.target.value)
+                                        }
+                                        className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
+                                    >
+                                        <option value="Basse">Basse</option>
+                                        <option value="Normale">Normale</option>
+                                        <option value="Haute">Haute</option>
+                                        <option value="Urgente">Urgente</option>
+                                    </select>
+                                    <SelectArrow />
+                                </div>
                             </div>
 
                             <div className="mb-4">
                                 <label className="mb-1 block text-sm font-medium text-gray-700">
                                     Catégorie
                                 </label>
-                                <select
-                                    value={data.category}
-                                    onChange={(e) =>
-                                        setData("category", e.target.value)
-                                    }
-                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
-                                >
-                                    <option value="Bug">Bug</option>
-                                    <option value="Demande">Demande</option>
-                                    <option value="Incident">Incident</option>
-                                    <option value="Question">Question</option>
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        value={data.category}
+                                        onChange={(e) =>
+                                            setData("category", e.target.value)
+                                        }
+                                        className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
+                                    >
+                                        <option value="Bug">Bug</option>
+                                        <option value="Demande">Demande</option>
+                                        <option value="Incident">Incident</option>
+                                        <option value="Question">Question</option>
+                                    </select>
+                                    <SelectArrow />
+                                </div>
                             </div>
 
                             <div className="mb-4">
                                 <label className="mb-1 block text-sm font-medium text-gray-700">
                                     Statut
                                 </label>
-                                <select
-                                    value={data.status}
-                                    onChange={(e) =>
-                                        setData("status", e.target.value)
-                                    }
-                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
-                                >
-                                    <option value="Ouvert">Ouvert</option>
-                                    <option value="En cours">En cours</option>
-                                    <option value="En attente">
-                                        En attente
-                                    </option>
-                                    <option value="Résolu">Résolu</option>
-                                    <option value="Fermé">Fermé</option>
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        value={data.status}
+                                        onChange={(e) =>
+                                            setData("status", e.target.value)
+                                        }
+                                        className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
+                                    >
+                                        <option value="Ouvert">Ouvert</option>
+                                        <option value="En cours">En cours</option>
+                                        <option value="En attente">En attente</option>
+                                        <option value="Résolu">Résolu</option>
+                                        <option value="Fermé">Fermé</option>
+                                    </select>
+                                    <SelectArrow />
+                                </div>
                             </div>
 
                             <div className="mb-4">
                                 <label className="mb-1 block text-sm font-medium text-gray-700">
                                     Assigné à
                                 </label>
-                                <select
-                                    value={data.assignee_id}
-                                    onChange={(e) =>
-                                        setData("assignee_id", e.target.value)
-                                    }
-                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
-                                >
-                                    <option value="">— Non assigné —</option>
-                                    {agents.map((agent) => (
-                                        <option key={agent.id} value={agent.id}>
-                                            {agent.name}
-                                        </option>
-                                    ))}
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        value={data.assignee_id}
+                                        onChange={(e) =>
+                                            setData("assignee_id", e.target.value)
+                                        }
+                                        className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
+                                    >
+                                        <option value="">— Non assigné —</option>
+                                        {agents.map((agent) => (
+                                            <option key={agent.id} value={agent.id}>
+                                                {agent.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <SelectArrow />
+                                </div>
                             </div>
 
                             <button

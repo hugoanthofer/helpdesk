@@ -19,12 +19,14 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
         'stats' => [
-            'ouvert' => \App\Models\Ticket::where('status', 'ouvert')->count(),
-            'en_cours' => \App\Models\Ticket::where('status', 'en cours')->count(),
-            'resolu' => \App\Models\Ticket::where('status', 'resolu')->count(),
+            'ouvert' => \App\Models\Ticket::where('status', \App\Enums\TicketStatus::Open->value)->count(),
+            'en_cours' => \App\Models\Ticket::where('status', \App\Enums\TicketStatus::In_progress->value)->count(),
+            'resolu' => \App\Models\Ticket::where('status', \App\Enums\TicketStatus::Resolved->value)->count(),
+            'ferme' => \App\Models\Ticket::where('status', \App\Enums\TicketStatus::Closed->value)->count(),
             'total' => \App\Models\Ticket::count(),
         ],
-        'recentTickets' => \App\Models\Ticket::latest()->take(5)->get(),
+        'recentTickets' => \App\Models\Ticket::where('status', '!=', \App\Enums\TicketStatus::Closed->value)->latest()->take(5)->get(),
+        'archivedTickets' => \App\Models\Ticket::where('status', \App\Enums\TicketStatus::Closed->value)->latest()->take(5)->get(),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

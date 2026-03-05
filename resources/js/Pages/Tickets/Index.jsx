@@ -33,29 +33,57 @@ export default function Index({ tickets, authId, userRole }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="mb-4 flex items-center gap-3">
-                        <select
-                            value={filtreStatut}
-                            onChange={(e) => setFiltreStatut(e.target.value)}
-                            className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
-                        >
-                            <option value="">Tous les statuts</option>
-                            <option value="Ouvert">Ouvert</option>
-                            <option value="En cours">En cours</option>
-                            <option value="En attente">En attente</option>
-                            <option value="Résolu">Résolu</option>
-                            <option value="Fermé">Fermé</option>
-                        </select>
-                        <select
-                            value={filtrePriorite}
-                            onChange={(e) => setFiltrePriorite(e.target.value)}
-                            className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
-                        >
-                            <option value="">Toutes les priorités</option>
-                            <option value="Basse">Basse</option>
-                            <option value="Normale">Normale</option>
-                            <option value="Haute">Haute</option>
-                            <option value="Urgente">Urgente</option>
-                        </select>
+                        <div className="relative">
+                            <select
+                                value={filtreStatut}
+                                onChange={(e) =>
+                                    setFiltreStatut(e.target.value)
+                                }
+                                className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
+                            >
+                                <option value="">Tous les statuts</option>
+                                <option value="Ouvert">Ouvert</option>
+                                <option value="En cours">En cours</option>
+                                <option value="En attente">En attente</option>
+                                <option value="Résolu">Résolu</option>
+                                <option value="Fermé">Fermé</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                                <svg
+                                    className="h-4 w-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M19 9l-7 7-7-7"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="relative">
+                            <select
+                                value={filtrePriorite}
+                                onChange={(e) =>
+                                    setFiltrePriorite(e.target.value)
+                                }
+                                className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
+                            >
+                                <option value="">Toutes les priorités</option>
+                                <option value="Basse">Basse</option>
+                                <option value="Normale">Normale</option>
+                                <option value="Haute">Haute</option>
+                                <option value="Urgente">Urgente</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </div>
                         <button
                             onClick={() => setMesTickets(!mesTickets)}
                             className={`rounded-md px-4 py-2 text-sm font-medium ${
