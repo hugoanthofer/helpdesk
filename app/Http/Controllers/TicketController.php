@@ -23,6 +23,8 @@ class TicketController extends Controller
 
         return Inertia::render('Tickets/Index', [
             'tickets' => $tickets,
+            'authId' => auth()->id(),
+            'userRole' => auth()->user()->getRoleNames()->first(),
         ]);
     }
 

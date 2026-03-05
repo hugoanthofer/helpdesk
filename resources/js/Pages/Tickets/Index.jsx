@@ -2,16 +2,22 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function Index({ tickets }) {
+export default function Index({ tickets, authId, userRole }) {
     const [filtreStatut, setFiltreStatut] = useState("");
     const [filtrePriorite, setFiltrePriorite] = useState("");
+    const [mesTickets, setMesTickets] = useState(false);
 
     const ticketsFiltres = tickets.filter((ticket) => {
         const matchStatut =
             filtreStatut === "" || ticket.status === filtreStatut;
         const matchPriorite =
             filtrePriorite === "" || ticket.priority === filtrePriorite;
-        return matchStatut && matchPriorite;
+        const matchAssigne =
+            !mesTickets ||
+            (userRole === "Client" && ticket.user_id === authId) ||
+            (userRole !== "Client" && ticket.assignee_id === authId);
+
+        return matchStatut && matchPriorite && matchAssigne;
     });
 
     return (
@@ -50,6 +56,16 @@ export default function Index({ tickets }) {
                             <option value="haute">Haute</option>
                             <option value="urgente">Urgente</option>
                         </select>
+                        <button
+                            onClick={() => setMesTickets(!mesTickets)}
+                            className={`rounded-md px-4 py-2 text-sm font-medium ${
+                                mesTickets
+                                    ? "bg-indigo-600 text-white hover:bg-indigo-700"
+                                    : "border border-indigo-600 text-indigo-600 hover:bg-indigo-50"
+                            }`}
+                        >
+                            Mes tickets
+                        </button>
                         <a
                             href={route("tickets.create")}
                             className="ml-auto rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
