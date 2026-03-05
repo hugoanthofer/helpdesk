@@ -1,6 +1,13 @@
 {
+  "permissions": {
+    "allow": [
+      "mcp__laravel-boost__list-routes",
+      "Bash(vendor/bin/pint:*)",
+      "Bash(php:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "laravel-boost"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

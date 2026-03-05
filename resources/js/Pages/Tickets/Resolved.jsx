@@ -1,16 +1,16 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
-export default function Archive({ tickets }) {
+export default function Resolved({ tickets }) {
     return (
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-slate-900">
-                    Archives
+                    Tickets résolus
                 </h2>
             }
         >
-            <Head title="Archives" />
+            <Head title="Tickets résolus" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -27,17 +27,18 @@ Route::get('/dashboard', function () {
         ],
         'recentTickets' => \App\Models\Ticket::where('status', '!=', \App\Enums\TicketStatus::Closed->value)->latest()->take(5)->get(),
         'archivedTickets' => \App\Models\Ticket::where('status', \App\Enums\TicketStatus::Closed->value)->latest()->take(5)->get(),
+        'resolvedTickets' => \App\Models\Ticket::where('status', \App\Enums\TicketStatus::Resolved->value)->latest()->take(5)->get(),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('tickets/archives', [TicketController::class, 'archived'])->name('tickets.archived');
+    Route::get('tickets/resolus', [TicketController::class, 'resolved'])->name('tickets.resolved');
     Route::resource('tickets', TicketController::class);
     Route::resource('tickets.comments', CommentController::class)->only(['store', 'destroy']);
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

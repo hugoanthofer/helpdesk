@@ -18,7 +18,7 @@ class TicketController extends Controller
     {
         $tickets = Ticket::query()
             ->with(['user', 'assignee'])
-            ->where('status', '!=', TicketStatus::Closed->value)
+            ->whereNotIn('status', [TicketStatus::Closed->value, TicketStatus::Resolved->value])
             ->latest()
             ->get();
 
@@ -32,7 +32,7 @@ class TicketController extends Controller
     /**
      * Display archived (closed) tickets.
      */
-    public function archived()
+    public function archived(): \Inertia\Response
     {
         $tickets = Ticket::query()
             ->with(['user', 'assignee'])
@@ -41,6 +41,22 @@ class TicketController extends Controller
             ->get();
 
         return Inertia::render('Tickets/Archive', [
+            'tickets' => $tickets,
+        ]);
+    }
+
+    /**
+     * Display resolved tickets.
+     */
+    public function resolved(): \Inertia\Response
+    {
+        $tickets = Ticket::query()
+            ->with(['user', 'assignee'])
+            ->where('status', TicketStatus::Resolved->value)
+            ->latest()
+            ->get();
+
+        return Inertia::render('Tickets/Resolved', [
             'tickets' => $tickets,
         ]);
     }
@@ -98,6 +114,7 @@ class TicketController extends Controller
         return Inertia::render('Tickets/Edit', [
             'ticket' => $ticket,
             'agents' => $agents,
+            'userRole' => auth()->user()->getRoleNames()->first(),
         ]);
     }
 

@@ -1,15 +1,12 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import SelectInput from "@/Components/SelectInput";
+import TextareaInput from "@/Components/TextareaInput";
+import TextInput from "@/Components/TextInput";
 import { Head, useForm } from "@inertiajs/react";
 
-const SelectArrow = () => (
-    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-    </div>
-);
-
-export default function Edit({ ticket, agents }) {
+export default function Edit({ ticket, agents, userRole }) {
     const { data, setData, put, errors } = useForm({
         title: ticket.title,
         description: ticket.description,
@@ -27,7 +24,7 @@ export default function Edit({ ticket, agents }) {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                <h2 className="text-xl font-semibold leading-tight text-slate-900">
                     Modification de Ticket
                 </h2>
             }
@@ -38,117 +35,85 @@ export default function Edit({ ticket, agents }) {
                     <div className="rounded-lg bg-white p-8 shadow">
                         <form onSubmit={submit}>
                             <div className="mb-4">
-                                <label className="mb-1 block text-sm font-medium text-gray-700">
-                                    Titre
-                                </label>
-                                <input
+                                <InputLabel htmlFor="title" value="Titre" />
+                                <TextInput
+                                    id="title"
                                     type="text"
                                     value={data.title}
-                                    onChange={(e) =>
-                                        setData("title", e.target.value)
-                                    }
-                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+                                    className="mt-1 block w-full"
+                                    onChange={(e) => setData("title", e.target.value)}
                                 />
-                                {errors.title && (
-                                    <p className="mt-1 text-sm text-red-600">
-                                        {errors.title}
-                                    </p>
-                                )}
+                                <InputError message={errors.title} className="mt-2" />
                             </div>
 
                             <div className="mb-4">
-                                <label className="mb-1 block text-sm font-medium text-gray-700">
-                                    Description
-                                </label>
-                                <textarea
+                                <InputLabel htmlFor="description" value="Description" />
+                                <TextareaInput
+                                    id="description"
                                     value={data.description}
-                                    onChange={(e) =>
-                                        setData("description", e.target.value)
-                                    }
-                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+                                    className="mt-1"
+                                    onChange={(e) => setData("description", e.target.value)}
                                 />
-                                {errors.description && (
-                                    <p className="mt-1 text-sm text-red-600">
-                                        {errors.description}
-                                    </p>
-                                )}
+                                <InputError message={errors.description} className="mt-2" />
                             </div>
 
                             <div className="mb-4">
-                                <label className="mb-1 block text-sm font-medium text-gray-700">
-                                    Priorité
-                                </label>
-                                <div className="relative">
-                                    <select
-                                        value={data.priority}
-                                        onChange={(e) =>
-                                            setData("priority", e.target.value)
-                                        }
-                                        className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
-                                    >
-                                        <option value="Basse">Basse</option>
-                                        <option value="Normale">Normale</option>
-                                        <option value="Haute">Haute</option>
-                                        <option value="Urgente">Urgente</option>
-                                    </select>
-                                    <SelectArrow />
-                                </div>
+                                <InputLabel htmlFor="priority" value="Priorité" />
+                                <SelectInput
+                                    id="priority"
+                                    value={data.priority}
+                                    className="mt-1"
+                                    onChange={(e) => setData("priority", e.target.value)}
+                                >
+                                    <option value="Basse">Basse</option>
+                                    <option value="Normale">Normale</option>
+                                    <option value="Haute">Haute</option>
+                                    <option value="Urgente">Urgente</option>
+                                </SelectInput>
+                                <InputError message={errors.priority} className="mt-2" />
                             </div>
 
                             <div className="mb-4">
-                                <label className="mb-1 block text-sm font-medium text-gray-700">
-                                    Catégorie
-                                </label>
-                                <div className="relative">
-                                    <select
-                                        value={data.category}
-                                        onChange={(e) =>
-                                            setData("category", e.target.value)
-                                        }
-                                        className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
-                                    >
-                                        <option value="Bug">Bug</option>
-                                        <option value="Demande">Demande</option>
-                                        <option value="Incident">Incident</option>
-                                        <option value="Question">Question</option>
-                                    </select>
-                                    <SelectArrow />
-                                </div>
+                                <InputLabel htmlFor="category" value="Catégorie" />
+                                <SelectInput
+                                    id="category"
+                                    value={data.category}
+                                    className="mt-1"
+                                    onChange={(e) => setData("category", e.target.value)}
+                                >
+                                    <option value="Bug">Bug</option>
+                                    <option value="Demande">Demande</option>
+                                    <option value="Incident">Incident</option>
+                                    <option value="Question">Question</option>
+                                </SelectInput>
+                                <InputError message={errors.category} className="mt-2" />
                             </div>
 
                             <div className="mb-4">
-                                <label className="mb-1 block text-sm font-medium text-gray-700">
-                                    Statut
-                                </label>
-                                <div className="relative">
-                                    <select
-                                        value={data.status}
-                                        onChange={(e) =>
-                                            setData("status", e.target.value)
-                                        }
-                                        className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
-                                    >
-                                        <option value="Ouvert">Ouvert</option>
-                                        <option value="En cours">En cours</option>
-                                        <option value="En attente">En attente</option>
-                                        <option value="Résolu">Résolu</option>
-                                        <option value="Fermé">Fermé</option>
-                                    </select>
-                                    <SelectArrow />
-                                </div>
+                                <InputLabel htmlFor="status" value="Statut" />
+                                <SelectInput
+                                    id="status"
+                                    value={data.status}
+                                    className="mt-1"
+                                    onChange={(e) => setData("status", e.target.value)}
+                                >
+                                    <option value="Ouvert">Ouvert</option>
+                                    <option value="En cours">En cours</option>
+                                    <option value="En attente">En attente</option>
+                                    <option value="Résolu">Résolu</option>
+                                    <option value="Fermé">Fermé</option>
+                                </SelectInput>
+                                <InputError message={errors.status} className="mt-2" />
                             </div>
 
-                            <div className="mb-4">
-                                <label className="mb-1 block text-sm font-medium text-gray-700">
-                                    Assigné à
-                                </label>
-                                <div className="relative">
-                                    <select
+                            {userRole !== "Client" && (
+                                <div className="mb-4">
+                                    <InputLabel htmlFor="assignee_id" value="Assigné à" />
+                                    <SelectInput
+                                        id="assignee_id"
                                         value={data.assignee_id}
-                                        onChange={(e) =>
-                                            setData("assignee_id", e.target.value)
-                                        }
-                                        className="appearance-none w-full rounded-md border border-gray-300 px-3 py-2 pr-8 text-sm focus:border-indigo-500 focus:outline-none"
+                                        className="mt-1"
+                                        onChange={(e) => setData("assignee_id", e.target.value)}
                                     >
                                         <option value="">— Non assigné —</option>
                                         {agents.map((agent) => (
@@ -156,14 +121,14 @@ export default function Edit({ ticket, agents }) {
                                                 {agent.name}
                                             </option>
                                         ))}
-                                    </select>
-                                    <SelectArrow />
+                                    </SelectInput>
+                                    <InputError message={errors.assignee_id} className="mt-2" />
                                 </div>
-                            </div>
+                            )}
 
                             <button
                                 type="submit"
-                                className="mt-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                                className="mt-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
                             >
                                 Modifier
                             </button>

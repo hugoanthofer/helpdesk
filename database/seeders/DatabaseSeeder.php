@@ -57,6 +57,21 @@ class DatabaseSeeder extends Seeder
         );
         $technicienDeux->assignRole('Technicien');
 
+        $fixedClients = collect([
+            ['email' => 'clientUn@helpdesk.nc', 'name' => 'ClientUn'],
+            ['email' => 'clientDeux@helpdesk.nc', 'name' => 'ClientDeux'],
+            ['email' => 'clientTrois@helpdesk.nc', 'name' => 'ClientTrois'],
+        ])->map(function ($data) {
+            $client = User::firstOrCreate(
+                ['email' => $data['email']],
+                ['name' => $data['name'], 'password' => bcrypt('password')]
+            );
+            $client->assignRole('Client');
+            Ticket::factory(3)->create(['user_id' => $client->id]);
+
+            return $client;
+        });
+
         $clients = User::factory(10)->create();
         $clients->each(fn ($client) => $client->assignRole('Client'));
         $clients->each(function ($client) {
