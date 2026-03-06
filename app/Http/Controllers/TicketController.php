@@ -89,7 +89,7 @@ class TicketController extends Controller
     public function show(string $id)
     {
         $ticket = Ticket::query()
-            ->with(['user', 'assignee', 'comments'])
+            ->with(['user', 'assignee', 'comments.user'])
             ->findOrFail($id);
 
         return Inertia::render('Tickets/Show', [
@@ -109,7 +109,7 @@ class TicketController extends Controller
             ->findOrFail($id);
         $this->authorize('update', $ticket);
 
-        $agents = User::role(['Admin', 'Technicien'])->get(['id', 'name']);
+        $agents = User::role(['Technicien'])->get(['id', 'name']);
 
         return Inertia::render('Tickets/Edit', [
             'ticket' => $ticket,

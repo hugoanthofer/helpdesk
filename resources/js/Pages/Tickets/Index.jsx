@@ -47,12 +47,11 @@ export default function Index({ tickets, authId, userRole }) {
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="mb-4 flex flex-wrap items-center gap-3">
-                        <div className="flex flex-wrap items-center gap-3">
+                    <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+                        <div className="grid grid-cols-2 gap-3 sm:flex sm:items-center">
                             <SelectInput
                                 value={filtreStatut}
                                 onChange={(e) => setFiltreStatut(e.target.value)}
-                                className="w-auto"
                             >
                                 <option value="">Tous les statuts</option>
                                 <option value="Ouvert">Ouvert</option>
@@ -63,7 +62,6 @@ export default function Index({ tickets, authId, userRole }) {
                             <SelectInput
                                 value={filtrePriorite}
                                 onChange={(e) => setFiltrePriorite(e.target.value)}
-                                className="w-auto"
                             >
                                 <option value="">Toutes les priorités</option>
                                 <option value="Basse">Basse</option>
@@ -71,39 +69,55 @@ export default function Index({ tickets, authId, userRole }) {
                                 <option value="Haute">Haute</option>
                                 <option value="Urgente">Urgente</option>
                             </SelectInput>
+                        </div>
 
+                        <div className="flex items-center gap-3 sm:ml-auto">
                             <button
                                 onClick={() => setMesTickets(!mesTickets)}
+                                title="Mes tickets"
                                 className={`rounded-md px-4 py-2 text-sm font-medium ${
                                     mesTickets
                                         ? "bg-blue-600 text-white hover:bg-blue-700"
                                         : "border border-blue-600 text-blue-600 hover:bg-blue-50"
                                 }`}
                             >
-                                Mes tickets
+                                <span className="hidden lg:inline">Mes tickets</span>
+                                <svg className="lg:hidden h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                </svg>
                             </button>
-                        </div>
 
-                        <div className="flex items-center gap-3">
                             <a
                                 href={route("tickets.resolved")}
+                                title="Résolus"
                                 className="rounded-md border border-green-500 px-4 py-2 text-sm font-medium text-green-600 hover:bg-green-50"
                             >
-                                Résolus
+                                <span className="hidden lg:inline">Résolus</span>
+                                <svg className="lg:hidden h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
                             </a>
 
                             <a
                                 href={route("tickets.archived")}
+                                title="Archivés"
                                 className="rounded-md border border-slate-400 px-4 py-2 text-sm font-medium text-slate-500 hover:bg-slate-100"
                             >
-                                Archivés
+                                <span className="hidden lg:inline">Archivés</span>
+                                <svg className="lg:hidden h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                                </svg>
                             </a>
 
                             <a
                                 href={route("tickets.create")}
-                                className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                                title="Nouveau ticket"
+                                className="ml-auto sm:ml-0 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
                             >
-                                Nouveau ticket
+                                <span className="hidden lg:inline">Nouveau ticket</span>
+                                <svg className="lg:hidden h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
                             </a>
                         </div>
                     </div>
@@ -115,10 +129,10 @@ export default function Index({ tickets, authId, userRole }) {
                                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
                                         Titre
                                     </th>
-                                    <th className="py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
-                                        Status
+                                    <th className="hidden sm:table-cell px-3 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
+                                        Statut
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
+                                    <th className="hidden sm:table-cell px-3 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
                                         Priorité
                                     </th>
                                 </tr>
@@ -137,13 +151,21 @@ export default function Index({ tickets, authId, userRole }) {
                                     >
                                         <td className="px-6 py-4 text-sm font-medium text-slate-900">
                                             {ticket.title}
+                                            <div className="mt-1 flex gap-2 sm:hidden">
+                                                <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${statutBadge[ticket.status]}`}>
+                                                    {ticket.status}
+                                                </span>
+                                                <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${prioriteBadge[ticket.priority]}`}>
+                                                    {ticket.priority}
+                                                </span>
+                                            </div>
                                         </td>
-                                        <td className="py-4">
+                                        <td className="hidden sm:table-cell px-3 py-4">
                                             <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${statutBadge[ticket.status]}`}>
                                                 {ticket.status}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="hidden sm:table-cell px-3 py-4">
                                             <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${prioriteBadge[ticket.priority]}`}>
                                                 {ticket.priority}
                                             </span>

@@ -30,15 +30,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $admin = User::firstOrCreate(
-            ['email' => 'admin@helpdesk.nc'],
-            [
-                'name' => 'Admin',
-                'password' => bcrypt('password'),
-            ]
-        );
-        $admin->assignRole('Admin');
-
         $technicienUn = User::firstOrCreate(
             ['email' => 'technicienUn@helpdesk.nc'],
             [

@@ -1,6 +1,13 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
+const prioriteBadge = {
+    "Basse":   "bg-slate-100 text-slate-500",
+    "Normale": "bg-blue-100 text-blue-600",
+    "Haute":   "bg-orange-100 text-orange-600",
+    "Urgente": "bg-red-100 text-red-600",
+};
+
 export default function Archive({ tickets }) {
     return (
         <AuthenticatedLayout
@@ -30,10 +37,10 @@ export default function Archive({ tickets }) {
                                     <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
                                         Titre
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
+                                    <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
                                         Priorité
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
+                                    <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-500">
                                         Créé par
                                     </th>
                                 </tr>
@@ -52,11 +59,21 @@ export default function Archive({ tickets }) {
                                     >
                                         <td className="px-6 py-4 text-sm font-medium text-slate-900">
                                             {ticket.title}
+                                            <div className="mt-1 flex gap-2 sm:hidden">
+                                                <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${prioriteBadge[ticket.priority]}`}>
+                                                    {ticket.priority}
+                                                </span>
+                                                <span className="text-xs text-slate-400">
+                                                    {ticket.user?.name}
+                                                </span>
+                                            </div>
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-slate-500">
-                                            {ticket.priority}
+                                        <td className="hidden sm:table-cell px-6 py-4">
+                                            <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${prioriteBadge[ticket.priority]}`}>
+                                                {ticket.priority}
+                                            </span>
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-slate-500">
+                                        <td className="hidden sm:table-cell px-6 py-4 text-sm text-slate-500">
                                             {ticket.user?.name}
                                         </td>
                                     </tr>

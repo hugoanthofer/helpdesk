@@ -37,7 +37,7 @@ class TicketPolicy
      */
     public function update(User $user, Ticket $ticket): bool
     {
-        return $user->hasAnyRole(['Admin', 'Technicien']) || $user->id === $ticket->user_id;
+        return $user->hasAnyRole(['Technicien']) || $user->id === $ticket->user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class TicketPolicy
      */
     public function delete(User $user, Ticket $ticket): bool
     {
-        return $user->hasAnyRole(['Admin', 'Technicien']) || $user->id === $ticket->user_id;
+        return $user->hasAnyRole(['Technicien']) || $user->id === $ticket->user_id;
 
     }
 

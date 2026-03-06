@@ -89,6 +89,20 @@ export default function Show({ ticket, canEdit, canDelete }) {
                                     key={comment.id}
                                     className="rounded-md bg-slate-50 px-4 py-3 text-sm text-slate-700"
                                 >
+                                    <div className="mb-1 flex items-center gap-2">
+                                        <span className="font-medium text-slate-800">
+                                            {comment.user.name}
+                                        </span>
+                                        <span className="text-xs text-slate-400">
+                                            {new Date(comment.created_at).toLocaleDateString("fr-FR", {
+                                                day: "numeric",
+                                                month: "short",
+                                                year: "numeric",
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            })}
+                                        </span>
+                                    </div>
                                     {comment.body}
                                 </div>
                             ))}

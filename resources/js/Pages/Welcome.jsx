@@ -2,12 +2,6 @@ import { Link } from "@inertiajs/react";
 
 const accounts = [
     {
-        role: "Admin",
-        email: "admin@helpdesk.nc",
-        badge: "bg-blue-100 text-blue-700",
-        description: "Accès complet : gestion de tous les tickets",
-    },
-    {
         role: "Technicien",
         email: "technicienUn@helpdesk.nc",
         badge: "bg-sky-100 text-sky-700",
@@ -49,8 +43,7 @@ export default function Welcome({ canLogin }) {
                     </h1>
                     <p className="mt-4 text-lg text-slate-600 max-w-xl mx-auto">
                         Plateforme de gestion de tickets de support. Les clients
-                        soumettent des demandes, les techniciens les traitent,
-                        les admins supervisent l'ensemble.
+                        soumettent des demandes, les techniciens les traitent.
                     </p>
                     {canLogin && (
                         <Link
@@ -97,7 +90,7 @@ export default function Welcome({ canLogin }) {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 text-center">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 text-center">
                     <div className="rounded-lg bg-white shadow p-5">
                         <p className="text-sm font-medium text-slate-500">
                             Rôle Client
@@ -112,14 +105,6 @@ export default function Welcome({ canLogin }) {
                         </p>
                         <p className="mt-2 text-sm text-slate-600">
                             Traite et met à jour les tickets assignés
-                        </p>
-                    </div>
-                    <div className="rounded-lg bg-white shadow p-5">
-                        <p className="text-sm font-medium text-slate-500">
-                            Rôle Admin
-                        </p>
-                        <p className="mt-2 text-sm text-slate-600">
-                            Supervision complète et gestion des tickets
                         </p>
                     </div>
                 </div>
