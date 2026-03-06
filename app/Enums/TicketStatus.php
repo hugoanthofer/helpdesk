@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum TicketStatus: string
 {
-    case Open = 'open';  
-    case In_progress = 'in_progress';  
-    case Waiting = 'waiting';  
-    case Resolved = 'resolved';  
-    case Closed = 'closed';  
+    case Open = 'Ouvert';
+    case In_progress = 'En cours';
+    case Waiting = 'En attente';
+    case Resolved = 'Résolu';
+    case Closed = 'Fermé';
 }

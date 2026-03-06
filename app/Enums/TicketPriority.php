@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum TicketPriority: string
 {
-    case Low = 'low';  
-    case Normal = 'normal';  
-    case High = 'high';  
-    case Urgent = 'urgent';  
+    case Low = 'Basse';
+    case Normal = 'Normale';
+    case High = 'Haute';
+    case Urgent = 'Urgente';
 }
