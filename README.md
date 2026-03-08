@@ -9,33 +9,23 @@ Application web de gestion de tickets de support — les clients soumettent des 
 
 | Rôle | Permissions |
 |------|-------------|
-| **Client** | Crée et suit ses propres tickets |
-| **Technicien** | Gère, traite et commente les tickets assignés |
-| **Admin** | Accès total + gestion utilisateurs + analytics |
+| **Client** | Crée et suit ses propres tickets, commente |
+| **Technicien** | Gère et traite les tickets, change statut/priorité/assignation, commente |
 
 ---
 
 ## ✨ Fonctionnalités
 
 ### 🙋 Client
-- Création de tickets (titre, description, catégorie, pièces jointes)
-- Suivi en temps réel du statut de ses tickets
-- Commentaires et échanges avec le technicien
+- Création de tickets (titre, description, catégorie)
+- Suivi du statut de ses tickets
+- Commentaires sur ses tickets
 
 ### 🔧 Technicien
-- Dashboard avec filtres avancés sur les tickets
-- Vue Kanban par statut
-- Changement de statut, priorité, assignation
-- Commentaires publics + notes internes (invisibles au client)
-- Ajout de pièces jointes
-
-### 👑 Admin
-- Tout ce que peut faire un technicien
-- Gestion des utilisateurs (créer, désactiver, changer le rôle)
-- Dashboard analytics :
-  - Tickets par statut et catégorie
-  - Performance des techniciens
-  - Temps moyen de résolution
+- Liste des tickets actifs avec filtres (statut, priorité, "Mes tickets")
+- Consultation et modification d'un ticket (statut, priorité, assignation)
+- Ajout et suppression de commentaires
+- Vue dédiée tickets résolus et tickets archivés
 
 ---
 
@@ -46,6 +36,16 @@ Application web de gestion de tickets de support — les clients soumettent des 
 **Statuts** : `Ouvert` → `En cours` → `En attente` → `Résolu` → `Fermé`
 
 **Priorités** : `Basse` · `Normale` · `Haute` · `Urgente`
+
+> Les tickets **Résolus** et **Fermés** sont séparés de la liste principale et accessibles via des pages dédiées.
+
+---
+
+## 📊 Dashboard
+
+- Compteurs par statut (Total, Ouverts, En cours, Résolus, Fermés)
+- Liste des derniers tickets actifs
+- Aperçu des tickets résolus et archivés récents
 
 ---
 
@@ -58,17 +58,15 @@ Application web de gestion de tickets de support — les clients soumettent des 
 | **React 18** | Frontend SPA |
 | **Tailwind CSS** | Styles |
 | **Spatie Permissions** | Gestion des rôles et permissions |
-| **Spatie Media Library** | Upload et gestion des pièces jointes |
 
 ---
 
 ## 🗄️ Base de données
 
 ```
-users         id, name, email, role, avatar, active
-tickets       id, title, description, status, priority, category, user_id, assignee_id
-comments      id, body, is_internal, ticket_id, user_id
-attachments   id, path, filename, attachable_id, attachable_type
+users       id, name, email, avatar, active, timestamps
+tickets     id, title, description, status, priority, category, user_id, assignee_id, timestamps
+comments    id, body, is_internal, ticket_id, user_id, timestamps
 ```
 
 ---
@@ -78,6 +76,11 @@ attachments   id, path, filename, attachable_id, attachable_type
 ```bash
 git clone https://github.com/ton-user/helpdesk.git
 cd helpdesk
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+npm install && npm run build
 ```
 
 ---

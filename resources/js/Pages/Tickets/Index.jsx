@@ -90,7 +90,7 @@ export default function Index({ tickets, authId, userRole }) {
                             <a
                                 href={route("tickets.resolved")}
                                 title="Résolus"
-                                className="rounded-md border border-green-500 px-4 py-2 text-sm font-medium text-green-600 hover:bg-green-50"
+                                className="rounded-md border border-green-500 px-4 py-2 text-sm font-medium text-green-600 transition-colors duration-150 hover:bg-green-50"
                             >
                                 <span className="hidden lg:inline">Résolus</span>
                                 <svg className="lg:hidden h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -101,7 +101,7 @@ export default function Index({ tickets, authId, userRole }) {
                             <a
                                 href={route("tickets.archived")}
                                 title="Archivés"
-                                className="rounded-md border border-slate-400 px-4 py-2 text-sm font-medium text-slate-500 hover:bg-slate-100"
+                                className="rounded-md border border-slate-400 px-4 py-2 text-sm font-medium text-slate-500 transition-colors duration-150 hover:bg-slate-100"
                             >
                                 <span className="hidden lg:inline">Archivés</span>
                                 <svg className="lg:hidden h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -112,7 +112,7 @@ export default function Index({ tickets, authId, userRole }) {
                             <a
                                 href={route("tickets.create")}
                                 title="Nouveau ticket"
-                                className="ml-auto sm:ml-0 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                                className="ml-auto sm:ml-0 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-blue-700"
                             >
                                 <span className="hidden lg:inline">Nouveau ticket</span>
                                 <svg className="lg:hidden h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -141,7 +141,7 @@ export default function Index({ tickets, authId, userRole }) {
                                 {ticketsFiltres.map((ticket) => (
                                     <tr
                                         key={ticket.id}
-                                        className="cursor-pointer hover:bg-slate-50"
+                                        className="cursor-pointer transition-colors duration-150 hover:bg-slate-50"
                                         onClick={() =>
                                             (window.location.href = route(
                                                 "tickets.show",

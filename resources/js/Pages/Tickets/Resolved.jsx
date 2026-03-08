@@ -24,7 +24,7 @@ export default function Resolved({ tickets }) {
                     <div className="mb-4 flex items-center gap-3">
                         <a
                             href={route("tickets.index")}
-                            className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50"
+                            className="rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 transition-colors duration-150 hover:bg-slate-50"
                         >
                             ← Retour aux tickets
                         </a>
@@ -49,7 +49,7 @@ export default function Resolved({ tickets }) {
                                 {tickets.map((ticket) => (
                                     <tr
                                         key={ticket.id}
-                                        className="cursor-pointer hover:bg-slate-50"
+                                        className="cursor-pointer transition-colors duration-150 hover:bg-slate-50"
                                         onClick={() =>
                                             (window.location.href = route(
                                                 "tickets.show",

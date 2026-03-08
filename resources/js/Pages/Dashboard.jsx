@@ -15,13 +15,13 @@ export default function Dashboard({ stats, recentTickets, archivedTickets, resol
             <div className="py-12">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
                     <div className="grid grid-cols-2 gap-4 sm:grid-cols-5">
-                        <div className="rounded-lg bg-white p-6 shadow text-center">
+                        <div className="rounded-lg bg-white p-6 shadow text-center transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
                             <p className="text-3xl font-bold text-blue-600">
                                 {stats.total}
                             </p>
                             <p className="mt-1 text-sm text-slate-500">Total</p>
                         </div>
-                        <div className="rounded-lg bg-white p-6 shadow text-center">
+                        <div className="rounded-lg bg-white p-6 shadow text-center transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
                             <p className="text-3xl font-bold text-sky-500">
                                 {stats.ouvert}
                             </p>
@@ -29,7 +29,7 @@ export default function Dashboard({ stats, recentTickets, archivedTickets, resol
                                 Ouverts
                             </p>
                         </div>
-                        <div className="rounded-lg bg-white p-6 shadow text-center">
+                        <div className="rounded-lg bg-white p-6 shadow text-center transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
                             <p className="text-3xl font-bold text-yellow-500">
                                 {stats.en_cours}
                             </p>
@@ -37,7 +37,7 @@ export default function Dashboard({ stats, recentTickets, archivedTickets, resol
                                 En cours
                             </p>
                         </div>
-                        <div className="rounded-lg bg-white p-6 shadow text-center">
+                        <div className="rounded-lg bg-white p-6 shadow text-center transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
                             <p className="text-3xl font-bold text-green-500">
                                 {stats.resolu}
                             </p>
@@ -45,7 +45,7 @@ export default function Dashboard({ stats, recentTickets, archivedTickets, resol
                                 Résolus
                             </p>
                         </div>
-                        <div className="rounded-lg bg-white p-6 shadow text-center">
+                        <div className="rounded-lg bg-white p-6 shadow text-center transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
                             <p className="text-3xl font-bold text-slate-400">
                                 {stats.ferme}
                             </p>
@@ -66,7 +66,7 @@ export default function Dashboard({ stats, recentTickets, archivedTickets, resol
                                 <li key={ticket.id}>
                                     <Link
                                         href={route("tickets.show", ticket.id)}
-                                        className="flex items-center justify-between px-6 py-4 hover:bg-slate-50"
+                                        className="flex items-center justify-between px-6 py-4 transition-colors duration-150 hover:bg-slate-50"
                                     >
                                         <span className="text-sm font-medium text-slate-800">
                                             {ticket.title}
@@ -97,7 +97,7 @@ export default function Dashboard({ stats, recentTickets, archivedTickets, resol
                                 <li key={ticket.id}>
                                     <Link
                                         href={route("tickets.show", ticket.id)}
-                                        className="flex items-center justify-between px-6 py-4 hover:bg-slate-50"
+                                        className="flex items-center justify-between px-6 py-4 transition-colors duration-150 hover:bg-slate-50"
                                     >
                                         <span className="text-sm font-medium text-green-700">
                                             {ticket.title}
@@ -128,7 +128,7 @@ export default function Dashboard({ stats, recentTickets, archivedTickets, resol
                                 <li key={ticket.id}>
                                     <Link
                                         href={route("tickets.show", ticket.id)}
-                                        className="flex items-center justify-between px-6 py-4 hover:bg-slate-50"
+                                        className="flex items-center justify-between px-6 py-4 transition-colors duration-150 hover:bg-slate-50"
                                     >
                                         <span className="text-sm font-medium text-slate-500">
                                             {ticket.title}
